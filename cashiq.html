@@ -6,639 +6,417 @@
 <title>Cash IQ</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;padding:0;background:#0D0D0F;color:#F0F0F4;font-family:'Space Grotesk',sans-serif;font-size:15px;}
-.page{display:none;padding:20px 16px 100px;}
-.page.active{display:block;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #0D0D0F; }
+body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0F0F4; font-size: 15px; }
 
-/* HERO */
-.hero{text-align:center;padding:40px 16px 24px;background:#0D0D0F;}
-.icon-box{width:64px;height:64px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 14px;}
-.hero h1{font-family:'Space Mono',monospace;font-size:2.2rem;font-weight:700;margin:0 0 6px;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero p{color:#6B6B7A;font-size:0.8rem;letter-spacing:.5px;text-transform:uppercase;font-weight:600;margin:0;}
+/* NAV — sticky top, sin overflow en body */
+.nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  background: #161619;
+  border-bottom: 1px solid #2A2A32;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nb {
+  flex: 1;
+  min-width: 60px;
+  padding: 11px 4px 10px;
+  border: none;
+  background: none;
+  color: #6B6B7A;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  -webkit-tap-highlight-color: transparent;
+}
+.nb .ni { font-size: 18px; line-height: 1; }
+.nb.on { color: #C6FF00; border-bottom-color: #C6FF00; }
 
-/* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;background:#161619;border-top:1px solid #2A2A32;display:flex;}
-.nb{flex:1;background:none;border:none;color:#6B6B7A;font-family:'Space Grotesk',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:10px 2px 12px;cursor:pointer;border-top:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:3px;}
-.nb span{font-size:20px;}
-.nb.on{color:#C6FF00;border-top-color:#C6FF00;}
+/* PAGES */
+.pg { display: none; padding: 18px 16px 60px; }
+.pg.on { display: block; }
 
 /* CARDS */
-.card{background:#161619;border:1px solid #2A2A32;border-radius:14px;padding:18px;margin-bottom:14px;position:relative;}
-.card-top{height:2px;position:absolute;top:0;left:0;right:0;border-radius:14px 14px 0 0;}
-.label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;margin-top:0;}
+.card { background: #161619; border: 1px solid #2A2A32; border-radius: 12px; padding: 16px; margin-bottom: 12px; position: relative; overflow: hidden; }
+.card-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 12px; }
 
-/* INFO CHIPS */
-.inforow{background:#1E1E23;border:1px solid #2A2A32;border-radius:10px;padding:12px 14px;margin-bottom:8px;}
-.inforow .tag{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
-.inforow .val{font-size:0.87rem;color:#F0F0F4;}
+/* INFO ROWS */
+.ir { background: #1E1E23; border-radius: 8px; padding: 10px 12px; margin-bottom: 7px; border-left: 3px solid; }
+.ir .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 2px; }
+.ir .v { font-size: 13px; color: #C8C8D0; line-height: 1.4; }
+
+/* TIPS */
+.tip { display: flex; gap: 10px; background: #1E1E23; border-radius: 10px; padding: 11px; border: 1px solid #2A2A32; margin-bottom: 7px; }
+.tn { font-size: 18px; font-weight: 700; min-width: 26px; color: #C6FF00; font-family: 'Space Mono', monospace; }
+.tip h4 { font-size: 13px; font-weight: 700; margin: 0 0 2px; color: #F0F0F4; }
+.tip p { font-size: 12px; color: #6B6B7A; margin: 0; line-height: 1.4; }
+
+/* HIGHLIGHT */
+.hl { background: #0D1A00; border: 1px solid #3A5500; border-radius: 8px; padding: 11px 13px; margin: 10px 0; font-size: 12px; font-weight: 600; color: #C6FF00; line-height: 1.5; }
+
+/* NVW */
+.nvw { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.nvbox { border-radius: 8px; padding: 10px; border: 1px solid; }
+.nvbox h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin: 0 0 7px; }
+.nvbox li { font-size: 11px; opacity: .85; padding: 2px 0; list-style: none; line-height: 1.4; }
 
 /* REGLA */
-.regla{display:flex;gap:8px;margin-top:10px;}
-.rb{flex:1;border-radius:12px;padding:14px 10px;border:1px solid;}
-.rb .pct{font-family:'Space Mono',monospace;font-size:1.8rem;font-weight:700;line-height:1;margin-bottom:2px;}
-.rb h4{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin:0 0 2px;}
-.rb p{font-size:0.7rem;opacity:.7;line-height:1.3;margin:0;}
-.rb1{background:rgba(198,255,0,.07);border-color:rgba(198,255,0,.25);color:#C6FF00;}
-.rb2{background:rgba(0,245,255,.07);border-color:rgba(0,245,255,.25);color:#00F5FF;}
-.rb3{background:rgba(155,92,255,.07);border-color:rgba(155,92,255,.3);color:#9B5CFF;}
+.regla { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 10px; }
+.rb { border-radius: 10px; padding: 12px 8px; border: 1px solid; }
+.rb .pct { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+.rb h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin: 0 0 2px; }
+.rb p { font-size: 10px; opacity: .7; line-height: 1.3; margin: 0; }
 
-/* NvW */
-.nvw{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
-.nvbox{border-radius:10px;padding:12px;border:1px solid;}
-.nvbox h4{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin:0 0 8px;}
-.nvbox ul{list-style:none;margin:0;padding:0;}
-.nvbox li{font-size:0.78rem;opacity:.85;padding:2px 0 2px 12px;position:relative;line-height:1.4;}
-.nvbox li::before{content:'→';position:absolute;left:0;font-size:0.7rem;}
-.need{background:rgba(0,245,255,.06);border-color:rgba(0,245,255,.2);color:#00F5FF;}
-.want{background:rgba(255,45,120,.06);border-color:rgba(255,45,120,.2);color:#FF2D78;}
-
-/* HL */
-.hl{background:rgba(198,255,0,.06);border:1px solid rgba(198,255,0,.2);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:0.83rem;font-weight:600;color:#D8FF60;line-height:1.5;}
-
-/* TIP LIST */
-.tip{display:flex;gap:12px;align-items:flex-start;background:#1E1E23;border-radius:12px;padding:12px;border:1px solid #2A2A32;margin-bottom:8px;}
-.tnum{font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;min-width:30px;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.tip h4{font-size:0.88rem;font-weight:700;margin:0 0 3px;}
-.tip p{font-size:0.8rem;color:#6B6B7A;line-height:1.5;margin:0;}
-
-/* BARRAS */
-.brow{margin:8px 0;}
-.brow-top{display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;color:#6B6B7A;margin-bottom:5px;}
-.btrack{height:5px;background:#1E1E23;border-radius:999px;overflow:hidden;}
-.bfill{height:100%;border-radius:999px;}
-
-/* PRESUPUESTO INPUTS */
-.prow{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid #2A2A32;}
-.prow:last-of-type{border-bottom:none;}
-.prow label{flex:1;font-size:0.85rem;font-weight:600;}
-.pinp{width:96px;background:#1E1E23;border:1px solid #2A2A32;border-radius:8px;padding:8px 10px;color:#F0F0F4;font-family:'Space Mono',monospace;font-size:0.85rem;text-align:right;outline:none;}
-.pinp:focus{border-color:#C6FF00;}
-.ptot{display:flex;justify-content:space-between;align-items:center;background:#1E1E23;border-radius:8px;padding:10px 14px;margin-top:8px;}
-.ptot .l{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6B6B7A;}
-.ptot .v{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;}
+/* PRES */
+.prow { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #2A2A32; }
+.prow:last-of-type { border: none; }
+.prow label { flex: 1; font-size: 12px; font-weight: 600; color: #C8C8D0; }
+.pinp { width: 90px; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 7px; padding: 7px 9px; color: #F0F0F4; font-family: 'Space Mono', monospace; font-size: 13px; text-align: right; outline: none; -webkit-appearance: none; }
+.pinp:focus { border-color: #C6FF00; }
+.ptot { display: flex; justify-content: space-between; align-items: center; background: #1E1E23; border-radius: 7px; padding: 9px 12px; margin-top: 8px; }
+.ptot .l { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #6B6B7A; }
+.ptot strong { font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; }
 
 /* BALANCE */
-.bals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:12px 0;}
-.balc{border-radius:10px;padding:10px 6px;border:1px solid;text-align:center;}
-.balc .bl{font-size:0.6rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;opacity:.8;}
-.balc .bv{font-family:'Space Mono',monospace;font-size:0.95rem;font-weight:700;}
-.bcin{background:rgba(0,245,255,.06);border-color:rgba(0,245,255,.2);color:#00F5FF;}
-.bcout{background:rgba(255,45,120,.06);border-color:rgba(255,45,120,.2);color:#FF2D78;}
-.bcfree{background:rgba(198,255,0,.06);border-color:rgba(198,255,0,.2);color:#C6FF00;}
-.resbox{display:none;border-radius:10px;padding:12px 14px;font-size:0.84rem;font-weight:600;line-height:1.5;margin-top:10px;}
+.bals { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin: 10px 0; }
+.balc { border-radius: 8px; padding: 9px 6px; border: 1px solid; text-align: center; }
+.balc .bl { font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 3px; opacity: .8; }
+.balc .bv { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; }
+.resbox { display: none; border-radius: 8px; padding: 10px 12px; margin-top: 8px; font-size: 12px; font-weight: 600; line-height: 1.5; }
 
-/* META INPUTS */
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
-.full{grid-column:1/-1;}
-.iw label{font-size:0.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6B6B7A;display:block;margin-bottom:5px;}
-.iw input{width:100%;background:#1E1E23;border:1px solid #2A2A32;border-radius:8px;padding:10px 12px;color:#F0F0F4;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;box-sizing:border-box;}
-.iw input:focus{border-color:#C6FF00;}
-.btn-lime{display:block;width:100%;padding:13px;border-radius:10px;border:none;background:#C6FF00;color:#0D0D0F;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;margin-top:8px;}
+/* META */
+.mgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.full { grid-column: 1 / -1; }
+.iw label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #6B6B7A; display: block; margin-bottom: 5px; }
+.iw input { width: 100%; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 7px; padding: 9px 10px; color: #F0F0F4; font-family: 'Space Grotesk', sans-serif; font-size: 13px; outline: none; -webkit-appearance: none; }
+.iw input:focus { border-color: #9B5CFF; }
+.btnlime { display: block; width: 100%; padding: 12px; border-radius: 9px; border: none; background: #C6FF00; color: #0D0D0F; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+
+/* BARRAS */
+.brow { margin: 7px 0; }
+.brow-top { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #6B6B7A; margin-bottom: 4px; }
+.btrack { height: 5px; background: #1E1E23; border-radius: 999px; overflow: hidden; }
+.bfill { height: 100%; border-radius: 999px; }
 
 /* QUIZ */
-.qcard{display:none;}
-.qcard.on{display:block;}
-.qbar{height:3px;background:#2A2A32;border-radius:999px;margin-bottom:16px;overflow:hidden;}
-.qfill{height:100%;background:linear-gradient(90deg,#C6FF00,#00F5FF);border-radius:999px;transition:width .4s;}
-.qbadge{display:inline-block;background:#1E1E23;border:1px solid #2A2A32;border-radius:6px;padding:3px 10px;font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#6B6B7A;margin-bottom:10px;}
-.qtxt{font-size:1rem;font-weight:700;line-height:1.4;margin-bottom:16px;}
-.opt{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;border-radius:10px;border:1px solid #2A2A32;background:#1E1E23;text-align:left;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:0.87rem;font-weight:600;color:#F0F0F4;margin-bottom:7px;}
-.opt::before{content:'';width:14px;height:14px;border-radius:50%;border:1.5px solid #2A2A32;flex-shrink:0;}
-.opt.ok{border-color:#C6FF00;color:#C6FF00;background:rgba(198,255,0,.06);}
-.opt.ok::before{background:#C6FF00;border-color:#C6FF00;}
-.opt.err{border-color:#FF2D78;color:#FF2D78;background:rgba(255,45,120,.06);}
-.opt.err::before{background:#FF2D78;border-color:#FF2D78;}
-.qfb{font-size:0.82rem;font-weight:600;margin:8px 0 0;min-height:16px;}
-.qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
-.qprog{font-size:0.75rem;color:#6B6B7A;font-weight:600;}
-.btn-next{padding:9px 20px;border-radius:8px;border:none;background:#C6FF00;color:#0D0D0F;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;}
-.btn-next:disabled{opacity:.3;cursor:default;}
-.btn-retry{padding:10px 28px;border-radius:8px;border:1px solid #2A2A32;background:transparent;color:#F0F0F4;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;}
+.qbar { height: 3px; background: #2A2A32; border-radius: 999px; margin-bottom: 14px; overflow: hidden; }
+.qfill { height: 100%; background: #C6FF00; border-radius: 999px; transition: width .4s; }
+.qbadge { display: inline-block; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 5px; padding: 2px 9px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B6B7A; margin-bottom: 9px; }
+.qtxt { font-size: 14px; font-weight: 700; line-height: 1.4; margin-bottom: 14px; color: #F0F0F4; }
+.opt { display: flex; align-items: center; gap: 9px; width: 100%; padding: 11px 12px; border-radius: 9px; border: 1px solid #2A2A32; background: #1E1E23; text-align: left; cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; color: #C8C8D0; margin-bottom: 6px; -webkit-tap-highlight-color: transparent; }
+.opt::before { content: ''; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid #2A2A32; flex-shrink: 0; }
+.opt.ok { border-color: #C6FF00; color: #C6FF00; background: #0D1A00; }
+.opt.ok::before { background: #C6FF00; border-color: #C6FF00; }
+.opt.err { border-color: #FF2D78; color: #FF2D78; background: #1A0010; }
+.opt.err::before { background: #FF2D78; border-color: #FF2D78; }
+.qfb { font-size: 11px; font-weight: 600; margin: 6px 0 0; min-height: 14px; }
+.qfoot { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.qprog { font-size: 11px; color: #6B6B7A; font-weight: 600; }
+.nxbtn { padding: 8px 18px; border-radius: 7px; border: none; background: #C6FF00; color: #0D0D0F; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.nxbtn:disabled { opacity: .3; cursor: default; }
 
 /* RESULT */
-#quiz-result{display:none;text-align:center;padding:32px 16px;}
-.rscore{font-family:'Space Mono',monospace;font-size:3.5rem;font-weight:700;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
-.rtitle{font-size:1.1rem;font-weight:700;margin:10px 0 6px;}
-.rsub{font-size:0.85rem;color:#6B6B7A;margin-bottom:22px;line-height:1.5;}
-
-/* PRINT OVERLAY */
-#printlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:9999;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
-.ppage{max-width:700px;margin:0 auto;padding:14px;font-family:'Space Grotesk',sans-serif;color:#111;}
-.phead{background:#111;border-radius:10px;padding:14px 18px;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
-.phead-icon{width:42px;height:42px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
-.phead h2{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;color:#C6FF00;margin:0;}
-.phead p{font-size:0.65rem;color:#888;margin:2px 0 0;}
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.psec h4{font-size:0.66rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:6px;margin-bottom:7px;}
-.pt1{background:#111;color:#C6FF00 !important;}
-.pt2{background:#111;color:#FF2D78 !important;}
-.pt3{background:#111;color:#00F5FF !important;}
-.pt4{background:#111;color:#9B5CFF !important;}
-.ptbl{width:100%;border-collapse:collapse;font-size:0.72rem;}
-.ptbl th{padding:5px 7px;background:#F5F5F5;border:1px solid #E0E0E0;font-weight:700;text-align:left;font-size:0.65rem;color:#555;text-transform:uppercase;letter-spacing:.4px;}
-.ptbl td{padding:7px;border:1px solid #E8E8E8;color:#333;}
-.ptbl tr:nth-child(even) td{background:#FAFAFA;}
-.pbox{background:#FFFFF0;border:1.5px solid #E8E000;border-radius:8px;padding:10px 12px;margin-top:8px;}
-.pbox h5{font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#7A6000;margin:0 0 6px;}
-.pbox p{font-size:0.72rem;color:#555;margin:3px 0;}
-.wline{border-bottom:1.5px dashed #CCC;min-height:20px;margin:3px 0;}
-.ptips{background:#F9F9F9;border:1px solid #E0E0E0;border-radius:8px;padding:10px 14px;margin-top:10px;}
-.ptips h5{font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#555;margin:0 0 6px;}
-.ptips li{font-size:0.71rem;color:#444;line-height:1.5;padding-left:14px;position:relative;list-style:none;margin-bottom:2px;}
-.ptips li::before{content:'→';position:absolute;left:0;color:#9B5CFF;font-weight:700;}
-.pft{text-align:center;font-size:0.65rem;color:#AAA;margin-top:10px;padding-top:8px;border-top:1px solid #EEE;}
-.btn-close{display:block;margin:0 auto 14px;padding:10px 28px;border-radius:8px;border:2px solid #111;background:white;color:#111;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;}
+.rscore { font-family: 'Space Mono', monospace; font-size: 48px; font-weight: 700; color: #C6FF00; line-height: 1; }
+.rtitle { font-size: 16px; font-weight: 700; margin: 10px 0 5px; color: #F0F0F4; }
+.rsub { font-size: 12px; color: #6B6B7A; margin-bottom: 20px; line-height: 1.5; }
+.retry { padding: 10px 24px; border-radius: 7px; border: 1px solid #2A2A32; background: transparent; color: #F0F0F4; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="icon-box">💸</div>
-  <h1>Cash IQ</h1>
-  <p>Finanzas para la generación que sí entiende</p>
+<!-- HERO -->
+<div style="text-align:center;padding:36px 16px 20px;background:#0D0D0F">
+  <div style="width:62px;height:62px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px">💸</div>
+  <h1 style="font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px">Cash IQ</h1>
+  <p style="color:#6B6B7A;font-size:0.78rem;letter-spacing:.5px;text-transform:uppercase;font-weight:600">Finanzas para la generación que sí entiende</p>
 </div>
 
-<!-- BOTTOM NAV -->
-<nav class="bnav">
-  <button class="nb on" id="nb-intro" onclick="showPage('intro')"><span>⚡</span>Start</button>
-  <button class="nb" id="nb-conceptos" onclick="showPage('conceptos')"><span>🧠</span>Conceptos</button>
-  <button class="nb" id="nb-pres" onclick="showPage('pres')"><span>📊</span>Presup.</button>
-  <button class="nb" id="nb-ahorro" onclick="showPage('ahorro')"><span>🎯</span>Ahorro</button>
-  <button class="nb" id="nb-quiz" onclick="showPage('quiz')"><span>🏆</span>Quiz</button>
+<!-- TOP NAV -->
+<nav class="nav">
+  <button class="nb on" id="nb0" onclick="go(0)"><span class="ni">⚡</span>Start</button>
+  <button class="nb" id="nb1" onclick="go(1)"><span class="ni">🧠</span>Conceptos</button>
+  <button class="nb" id="nb2" onclick="go(2)"><span class="ni">📊</span>Presup.</button>
+  <button class="nb" id="nb3" onclick="go(3)"><span class="ni">🎯</span>Ahorro</button>
+  <button class="nb" id="nb4" onclick="go(4)"><span class="ni">🏆</span>Quiz</button>
 </nav>
 
-<!-- PAGE: INTRO -->
-<div class="page active" id="page-intro">
+<!-- PAGE 0: START -->
+<div class="pg on" id="pg0">
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
-    <p class="label" style="color:#C6FF00">// ¿Por qué esto importa?</p>
-    <p style="font-size:0.88rem;color:#6B6B7A;line-height:1.6;margin:0 0 14px">El dinero es una herramienta. Quien aprende a usarla joven tiene ventaja para siempre.</p>
-    <div class="inforow" style="border-color:rgba(198,255,0,.2)"><div class="tag" style="color:#C6FF00">🎮</div><div class="val">Tomas tus propias decisiones</div></div>
-    <div class="inforow" style="border-color:rgba(0,245,255,.2)"><div class="tag" style="color:#00F5FF">🚀</div><div class="val">Alcanzas lo que quieres</div></div>
-    <div class="inforow" style="border-color:rgba(155,92,255,.2)"><div class="tag" style="color:#9B5CFF">😌</div><div class="val">Menos estrés por dinero</div></div>
-    <div class="inforow" style="border-color:rgba(255,45,120,.2)"><div class="tag" style="color:#FF2D78">🏆</div><div class="val">Ventaja de por vida</div></div>
+    <div class="card-line" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
+    <p class="lbl" style="color:#C6FF00">// ¿por qué importa?</p>
+    <div class="ir" style="border-color:#C6FF00"><div class="k" style="color:#C6FF00">💸 Tomas control</div><div class="v">Tú decides a dónde va tu dinero, no las tiendas ni los ads</div></div>
+    <div class="ir" style="border-color:#00F5FF"><div class="k" style="color:#00F5FF">🚀 Alcanzas metas</div><div class="v">Puedes comprar lo que quieres sin pedirle a nadie</div></div>
+    <div class="ir" style="border-color:#9B5CFF"><div class="k" style="color:#9B5CFF">😌 Menos estrés</div><div class="v">Saber que tienes ahorros da una tranquilidad increíble</div></div>
+    <div class="ir" style="border-color:#FF2D78"><div class="k" style="color:#FF2D78">🏆 Ventaja de por vida</div><div class="v">Los que aprenden jóvenes tienen mucho más éxito de adultos</div></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:#9B5CFF"></div>
-    <p class="label" style="color:#9B5CFF">// Lo que vas a aprender</p>
-    <div class="tip"><span class="tnum">01</span><div><h4>Conceptos clave</h4><p>Ingreso, gasto, ahorro, presupuesto — el vocabulario real del dinero</p></div></div>
-    <div class="tip"><span class="tnum">02</span><div><h4>Tu presupuesto</h4><p>Calculadora interactiva para tus finanzas semanales</p></div></div>
-    <div class="tip"><span class="tnum">03</span><div><h4>Hacks para ahorrar</h4><p>6 trucos + el método que genera $1,378 en un año</p></div></div>
-    <div class="tip"><span class="tnum">04</span><div><h4>Quiz final</h4><p>8 preguntas para ver qué tanto sabes</p></div></div>
+    <div class="card-line" style="background:#9B5CFF"></div>
+    <p class="lbl" style="color:#9B5CFF">// lo que vas a aprender</p>
+    <div class="tip"><span class="tn">01</span><div><h4>Conceptos clave</h4><p>Ingreso, gasto, ahorro, presupuesto — el vocabulario real</p></div></div>
+    <div class="tip"><span class="tn">02</span><div><h4>Tu presupuesto</h4><p>Calculadora en tiempo real para tus finanzas semanales</p></div></div>
+    <div class="tip"><span class="tn">03</span><div><h4>Hacks para ahorrar</h4><p>6 trucos + el método que genera $1,378 en un año</p></div></div>
+    <div class="tip"><span class="tn">04</span><div><h4>Quiz final</h4><p>8 preguntas para ver qué tanto aprendiste</p></div></div>
   </div>
   <div class="hl">💡 El 70% de adultos dice que ojalá le hubieran enseñado finanzas de joven. Tú ya llevas ventaja.</div>
 </div>
 
-<!-- PAGE: CONCEPTOS -->
-<div class="page" id="page-conceptos">
+<!-- PAGE 1: CONCEPTOS -->
+<div class="pg" id="pg1">
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#00F5FF,#C6FF00)"></div>
-    <p class="label" style="color:#00F5FF">// 4 términos clave</p>
-    <div class="inforow" style="border-color:rgba(0,245,255,.25);margin-bottom:8px"><div class="tag" style="color:#00F5FF">INGRESO</div><div class="val">Todo el dinero que <b>entra</b> — mesada, regalos, trabajo extra</div></div>
-    <div class="inforow" style="border-color:rgba(255,45,120,.25);margin-bottom:8px"><div class="tag" style="color:#FF2D78">GASTO</div><div class="val">Todo el dinero que <b>sale</b> — comida, juegos, ropa</div></div>
-    <div class="inforow" style="border-color:rgba(198,255,0,.25);margin-bottom:8px"><div class="tag" style="color:#C6FF00">AHORRO</div><div class="val">Dinero que <b>guardas</b> hoy para después o emergencias</div></div>
-    <div class="inforow" style="border-color:rgba(155,92,255,.25)"><div class="tag" style="color:#9B5CFF">PRESUPUESTO</div><div class="val">Un <b>plan escrito</b> de cuánto gastar y en qué</div></div>
+    <div class="card-line" style="background:linear-gradient(90deg,#00F5FF,#C6FF00)"></div>
+    <p class="lbl" style="color:#00F5FF">// 4 términos clave</p>
+    <div class="ir" style="border-color:#00F5FF"><div class="k" style="color:#00F5FF">INGRESO</div><div class="v">Todo el dinero que <b>entra</b> — mesada, regalos, trabajo extra</div></div>
+    <div class="ir" style="border-color:#FF2D78"><div class="k" style="color:#FF2D78">GASTO</div><div class="v">Todo el dinero que <b>sale</b> — comida, juegos, ropa</div></div>
+    <div class="ir" style="border-color:#C6FF00"><div class="k" style="color:#C6FF00">AHORRO</div><div class="v">Dinero que <b>guardas</b> hoy para después o emergencias</div></div>
+    <div class="ir" style="border-color:#9B5CFF"><div class="k" style="color:#9B5CFF">PRESUPUESTO</div><div class="v">Un <b>plan escrito</b> de cuánto gastar y en qué</div></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#FF2D78,#9B5CFF)"></div>
-    <p class="label" style="color:#FF2D78">// Necesidades vs. Deseos</p>
+    <div class="card-line" style="background:linear-gradient(90deg,#FF2D78,#9B5CFF)"></div>
+    <p class="lbl" style="color:#FF2D78">// necesidades vs. deseos</p>
     <div class="nvw">
-      <div class="nvbox need">
+      <div class="nvbox" style="background:#001A1A;border-color:#00F5FF;color:#00F5FF">
         <h4>Necesidades ✓</h4>
-        <ul><li>Comida</li><li>Útiles</li><li>Transporte</li><li>Ropa básica</li></ul>
+        <ul><li>Comida</li><li>Útiles escolares</li><li>Transporte</li><li>Ropa básica</li></ul>
       </div>
-      <div class="nvbox want">
+      <div class="nvbox" style="background:#1A0010;border-color:#FF2D78;color:#FF2D78">
         <h4>Deseos ✗</h4>
         <ul><li>Videojuegos</li><li>Bebidas fancy</li><li>Tenis de marca</li><li>Snacks extra</li></ul>
       </div>
     </div>
-    <div class="hl" style="margin-bottom:0">Necesidades primero → ahorro → con lo que sobre: deseos.</div>
+    <div class="hl" style="margin-bottom:0">Necesidades primero → ahorro → con lo que sobre: deseos. No al revés.</div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#FFB800,#C6FF00)"></div>
-    <p class="label" style="color:#FFB800">// Regla 50 / 30 / 20</p>
+    <div class="card-line" style="background:linear-gradient(90deg,#FFB800,#C6FF00)"></div>
+    <p class="lbl" style="color:#FFB800">// regla 50 / 30 / 20</p>
     <div class="regla">
-      <div class="rb rb1"><div class="pct">50%</div><h4>Necesidades</h4><p>Comida, transporte, útiles</p></div>
-      <div class="rb rb2"><div class="pct">30%</div><h4>Deseos</h4><p>Diversión, juegos, salidas</p></div>
-      <div class="rb rb3"><div class="pct">20%</div><h4>Ahorro 🐷</h4><p>Para metas y emergencias</p></div>
+      <div class="rb" style="background:#0D1A00;border-color:#3A5500;color:#C6FF00"><div class="pct">50%</div><h4>Necesidades</h4><p>Comida, transporte, útiles</p></div>
+      <div class="rb" style="background:#001A1A;border-color:#005555;color:#00F5FF"><div class="pct">30%</div><h4>Deseos</h4><p>Diversión, juegos, salidas</p></div>
+      <div class="rb" style="background:#120020;border-color:#3A1A6A;color:#9B5CFF"><div class="pct">20%</div><h4>Ahorro 🐷</h4><p>Metas y emergencias</p></div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: PRESUPUESTO -->
-<div class="page" id="page-pres">
+<!-- PAGE 2: PRESUPUESTO -->
+<div class="pg" id="pg2">
   <div class="card">
-    <div class="card-top" style="background:#00F5FF"></div>
-    <p class="label" style="color:#00F5FF">// Ingresos esta semana</p>
-    <div class="prow"><label>💰 Mesada / domingo</label><input class="pinp ingreso" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>🎁 Regalos</label><input class="pinp ingreso" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>🛠️ Trabajo extra</label><input class="pinp ingreso" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>⭐ Otro</label><input class="pinp ingreso" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="ptot"><span class="l">Total ingresos</span><span class="v" id="ti" style="color:#00F5FF">$0</span></div>
+    <div class="card-line" style="background:#00F5FF"></div>
+    <p class="lbl" style="color:#00F5FF">// ingresos esta semana</p>
+    <div class="prow"><label>💰 Mesada / domingo</label><input class="pinp" id="i0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>🎁 Regalos</label><input class="pinp" id="i1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>🛠️ Trabajo extra</label><input class="pinp" id="i2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>⭐ Otro</label><input class="pinp" id="i3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="ptot"><span class="l">Total ingresos</span><strong id="ti" style="color:#00F5FF">$0</strong></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:#FF2D78"></div>
-    <p class="label" style="color:#FF2D78">// Gastos esta semana</p>
-    <div class="prow"><label>🍕 Comida / antojo</label><input class="pinp gasto" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>🎮 Juegos / entrete.</label><input class="pinp gasto" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>📚 Útiles / libros</label><input class="pinp gasto" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>👟 Ropa / accesorios</label><input class="pinp gasto" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="prow"><label>🌀 Otro</label><input class="pinp gasto" type="number" placeholder="0" min="0" inputmode="decimal"></div>
-    <div class="ptot"><span class="l">Total gastos</span><span class="v" id="tg" style="color:#FF2D78">$0</span></div>
+    <div class="card-line" style="background:#FF2D78"></div>
+    <p class="lbl" style="color:#FF2D78">// gastos esta semana</p>
+    <div class="prow"><label>🍕 Comida / antojo</label><input class="pinp" id="g0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>🎮 Juegos / entrete.</label><input class="pinp" id="g1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>📚 Útiles / libros</label><input class="pinp" id="g2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>👟 Ropa / accesorios</label><input class="pinp" id="g3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>🌀 Otro</label><input class="pinp" id="g4" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="ptot"><span class="l">Total gastos</span><strong id="tg" style="color:#FF2D78">$0</strong></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
-    <p class="label" style="color:#C6FF00">// Tu balance</p>
+    <div class="card-line" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
+    <p class="lbl" style="color:#C6FF00">// tu balance</p>
     <div class="bals">
-      <div class="balc bcin"><div class="bl">Entró</div><div class="bv" id="bi">$0</div></div>
-      <div class="balc bcout"><div class="bl">Salió</div><div class="bv" id="bg">$0</div></div>
-      <div class="balc bcfree"><div class="bl">Libre</div><div class="bv" id="bf">$0</div></div>
+      <div class="balc" style="background:#001A1A;border-color:#00F5FF;color:#00F5FF"><div class="bl">Entró</div><div class="bv" id="bi">$0</div></div>
+      <div class="balc" style="background:#1A0010;border-color:#FF2D78;color:#FF2D78"><div class="bl">Salió</div><div class="bv" id="bg">$0</div></div>
+      <div class="balc" style="background:#0D1A00;border-color:#C6FF00;color:#C6FF00"><div class="bl">Libre</div><div class="bv" id="bf">$0</div></div>
     </div>
-    <div class="resbox" id="res-pres"></div>
+    <div class="resbox" id="rp"></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:#9B5CFF"></div>
-    <p class="label" style="color:#9B5CFF">// ¿Cuándo alcanzo mi meta?</p>
+    <div class="card-line" style="background:#9B5CFF"></div>
+    <p class="lbl" style="color:#9B5CFF">// ¿cuándo alcanzo mi meta?</p>
     <div class="mgrid">
       <div class="iw full"><label>¿Para qué quiero ahorrar?</label><input type="text" id="mn" placeholder="Ej: tenis nuevos, videojuego"></div>
       <div class="iw"><label>¿Cuánto cuesta? ($)</label><input type="number" id="mc" placeholder="800" inputmode="decimal"></div>
       <div class="iw"><label>¿Ya tienes? ($)</label><input type="number" id="mt" placeholder="200" inputmode="decimal"></div>
-      <div class="iw full"><label>¿Cuánto puedes ahorrar por semana? ($)</label><input type="number" id="ms" placeholder="50" inputmode="decimal"></div>
-      <button class="btn-lime full" onclick="calcMeta()">Calcular →</button>
-      <div class="resbox full" id="res-meta"></div>
+      <div class="iw full"><label>¿Cuánto puedes ahorrar/semana? ($)</label><input type="number" id="ms" placeholder="50" inputmode="decimal"></div>
+      <button class="btnlime full" onclick="meta()">Calcular →</button>
+      <div class="resbox full" id="rm"></div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: AHORRO -->
-<div class="page" id="page-ahorro">
+<!-- PAGE 3: AHORRO -->
+<div class="pg" id="pg3">
   <div class="card">
-    <div class="card-top" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
-    <p class="label" style="color:#C6FF00">// 6 hacks para ahorrar</p>
-    <div class="tip"><span class="tnum">01</span><div><h4>Ahorra PRIMERO, no al final</h4><p>Separa tu ahorro en cuanto recibes dinero, antes de gastar nada.</p></div></div>
-    <div class="tip"><span class="tnum">02</span><div><h4>Ponle nombre a tu ahorro</h4><p>Un objetivo concreto motiva 3 veces más que ahorrar "en general".</p></div></div>
-    <div class="tip"><span class="tnum">03</span><div><h4>Regla de las 24 horas</h4><p>Antes de comprar algo no planeado, espera un día. Casi siempre ya no lo quieres.</p></div></div>
-    <div class="tip"><span class="tnum">04</span><div><h4>Anota todo lo que gastas</h4><p>Solo registrándolo descubres dónde se va el dinero sin darte cuenta.</p></div></div>
-    <div class="tip"><span class="tnum">05</span><div><h4>Compara precios siempre</h4><p>2 minutos buscando puede ahorrarte mucho. El mismo producto cuesta diferente en distintos lados.</p></div></div>
-    <div class="tip"><span class="tnum">06</span><div><h4>No compres por presión social</h4><p>Tú decides a dónde va tu dinero, no tus amigos ni los anuncios.</p></div></div>
+    <div class="card-line" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
+    <p class="lbl" style="color:#C6FF00">// 6 hacks para ahorrar</p>
+    <div class="tip"><span class="tn">01</span><div><h4>Ahorra PRIMERO, no al final</h4><p>Separa tu ahorro en cuanto recibes dinero, antes de cualquier gasto.</p></div></div>
+    <div class="tip"><span class="tn">02</span><div><h4>Ponle nombre a tu ahorro</h4><p>Un objetivo concreto motiva 3 veces más que ahorrar "en general".</p></div></div>
+    <div class="tip"><span class="tn">03</span><div><h4>Regla de las 24 horas</h4><p>Antes de comprar algo no planeado, espera un día. Casi siempre ya no lo quieres.</p></div></div>
+    <div class="tip"><span class="tn">04</span><div><h4>Anota todo lo que gastas</h4><p>Solo registrándolo descubres dónde se va el dinero sin darte cuenta.</p></div></div>
+    <div class="tip"><span class="tn">05</span><div><h4>Compara precios siempre</h4><p>2 minutos buscando puede ahorrarte mucho. El mismo producto cuesta diferente en distintos lados.</p></div></div>
+    <div class="tip"><span class="tn">06</span><div><h4>No compres por presión social</h4><p>Tú decides a dónde va tu dinero, no tus amigos ni los anuncios.</p></div></div>
   </div>
   <div class="card">
-    <div class="card-top" style="background:#FFB800"></div>
-    <p class="label" style="color:#FFB800">// Método 52 semanas</p>
-    <p style="font-size:0.83rem;color:#6B6B7A;line-height:1.5;margin:0 0 14px">Semana 1 guardas $1 · Semana 2 guardas $2 · y así 52 semanas:</p>
+    <div class="card-line" style="background:#FFB800"></div>
+    <p class="lbl" style="color:#FFB800">// método 52 semanas</p>
+    <p style="font-size:12px;color:#6B6B7A;margin:0 0 12px;line-height:1.5">Semana 1 guardas $1 · Semana 2 guardas $2 · y así 52 semanas:</p>
     <div class="brow"><div class="brow-top"><span>Semana 1</span><span style="color:#C6FF00">$1</span></div><div class="btrack"><div class="bfill" style="width:2%;background:#C6FF00"></div></div></div>
-    <div class="brow"><div class="brow-top"><span>Semana 13 (¼ año)</span><span style="color:#00F5FF">$91</span></div><div class="btrack"><div class="bfill" style="width:25%;background:#00F5FF"></div></div></div>
-    <div class="brow"><div class="brow-top"><span>Semana 26 (½ año)</span><span style="color:#FFB800">$351</span></div><div class="btrack"><div class="bfill" style="width:50%;background:#FFB800"></div></div></div>
-    <div class="brow"><div class="brow-top"><span>Semana 52 (1 año 🎉)</span><span style="color:#9B5CFF">$1,378</span></div><div class="btrack"><div class="bfill" style="width:100%;background:linear-gradient(90deg,#C6FF00,#9B5CFF)"></div></div></div>
+    <div class="brow"><div class="brow-top"><span>Semana 13 — ¼ año</span><span style="color:#00F5FF">$91</span></div><div class="btrack"><div class="bfill" style="width:25%;background:#00F5FF"></div></div></div>
+    <div class="brow"><div class="brow-top"><span>Semana 26 — ½ año</span><span style="color:#FFB800">$351</span></div><div class="btrack"><div class="bfill" style="width:50%;background:#FFB800"></div></div></div>
+    <div class="brow"><div class="brow-top"><span>Semana 52 — 1 año 🎉</span><span style="color:#9B5CFF">$1,378</span></div><div class="btrack"><div class="bfill" style="width:100%;background:#9B5CFF"></div></div></div>
     <div class="hl" style="margin-bottom:0">Empezando con $1 y sumando $1 cada semana terminas el año con $1,378. El hábito lo hace todo.</div>
   </div>
-  <button class="btn-lime" onclick="showPrint()">Abrir hoja imprimible →</button>
 </div>
 
-<!-- PAGE: QUIZ -->
-<div class="page" id="page-quiz">
-  <div class="card" id="quiz-wrap">
-    <div class="card-top" style="background:linear-gradient(90deg,#9B5CFF,#FF2D78)"></div>
-    <div class="qbar"><div class="qfill" id="qfill" style="width:0%"></div></div>
-
-    <div class="qcard on" id="q0" data-c="b">
-      <span class="qbadge">01 / 08</span>
-      <p class="qtxt">¿Qué se hace PRIMERO con el dinero según las buenas finanzas?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">Gastar en lo que quiero</button>
-        <button class="opt" data-v="b" onclick="answer(this)">Separar el ahorro</button>
-        <button class="opt" data-v="c" onclick="answer(this)">Comprar comida rápida</button>
-        <button class="opt" data-v="d" onclick="answer(this)">Prestárselo a un amigo</button>
-      </div>
-      <p class="qfb" id="fb0"></p>
-      <div class="qfoot"><span class="qprog">1 de 8</span><button class="btn-next" id="nx0" disabled onclick="nextQ(0)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q1" data-c="c">
-      <span class="qbadge">02 / 08</span>
-      <p class="qtxt">¿Qué es un "presupuesto"?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">Una cuenta bancaria especial</button>
-        <button class="opt" data-v="b" onclick="answer(this)">Todo el dinero que ganas en un año</button>
-        <button class="opt" data-v="c" onclick="answer(this)">Un plan escrito de cuánto gastar y en qué</button>
-        <button class="opt" data-v="d" onclick="answer(this)">Una app del celular</button>
-      </div>
-      <p class="qfb" id="fb1"></p>
-      <div class="qfoot"><span class="qprog">2 de 8</span><button class="btn-next" id="nx1" disabled onclick="nextQ(1)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q2" data-c="a">
-      <span class="qbadge">03 / 08</span>
-      <p class="qtxt">Según la Regla 50/30/20, ¿qué porcentaje se recomienda ahorrar?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">20%</button>
-        <button class="opt" data-v="b" onclick="answer(this)">50%</button>
-        <button class="opt" data-v="c" onclick="answer(this)">30%</button>
-        <button class="opt" data-v="d" onclick="answer(this)">10%</button>
-      </div>
-      <p class="qfb" id="fb2"></p>
-      <div class="qfoot"><span class="qprog">3 de 8</span><button class="btn-next" id="nx2" disabled onclick="nextQ(2)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q3" data-c="b">
-      <span class="qbadge">04 / 08</span>
-      <p class="qtxt">¿Cuál de estas es una NECESIDAD y no un deseo?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">Videojuego nuevo</button>
-        <button class="opt" data-v="b" onclick="answer(this)">Útiles escolares</button>
-        <button class="opt" data-v="c" onclick="answer(this)">Bebida de Starbucks</button>
-        <button class="opt" data-v="d" onclick="answer(this)">Ropa de marca</button>
-      </div>
-      <p class="qfb" id="fb3"></p>
-      <div class="qfoot"><span class="qprog">4 de 8</span><button class="btn-next" id="nx3" disabled onclick="nextQ(3)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q4" data-c="c">
-      <span class="qbadge">05 / 08</span>
-      <p class="qtxt">¿Cuánto acumulas en 1 año con el Método 52 Semanas?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">$500</button>
-        <button class="opt" data-v="b" onclick="answer(this)">$780</button>
-        <button class="opt" data-v="c" onclick="answer(this)">$1,378</button>
-        <button class="opt" data-v="d" onclick="answer(this)">$2,000</button>
-      </div>
-      <p class="qfb" id="fb4"></p>
-      <div class="qfoot"><span class="qprog">5 de 8</span><button class="btn-next" id="nx4" disabled onclick="nextQ(4)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q5" data-c="d">
-      <span class="qbadge">06 / 08</span>
-      <p class="qtxt">¿Cuándo es el mejor momento para separar tu ahorro?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">Al final del mes, con lo que sobre</button>
-        <button class="opt" data-v="b" onclick="answer(this)">Solo cuando tienes mucho dinero</button>
-        <button class="opt" data-v="c" onclick="answer(this)">Una vez al año</button>
-        <button class="opt" data-v="d" onclick="answer(this)">En cuanto recibes el dinero</button>
-      </div>
-      <p class="qfb" id="fb5"></p>
-      <div class="qfoot"><span class="qprog">6 de 8</span><button class="btn-next" id="nx5" disabled onclick="nextQ(5)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q6" data-c="b">
-      <span class="qbadge">07 / 08</span>
-      <p class="qtxt">Si tienes $100, ¿cuánto ahorrar con la regla del 20%?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">$10</button>
-        <button class="opt" data-v="b" onclick="answer(this)">$20</button>
-        <button class="opt" data-v="c" onclick="answer(this)">$50</button>
-        <button class="opt" data-v="d" onclick="answer(this)">$30</button>
-      </div>
-      <p class="qfb" id="fb6"></p>
-      <div class="qfoot"><span class="qprog">7 de 8</span><button class="btn-next" id="nx6" disabled onclick="nextQ(6)">Siguiente →</button></div>
-    </div>
-
-    <div class="qcard" id="q7" data-c="a">
-      <span class="qbadge">08 / 08</span>
-      <p class="qtxt">¿Para qué sirve la "Regla de las 24 horas"?</p>
-      <div>
-        <button class="opt" data-v="a" onclick="answer(this)">Para no comprar cosas por impulso</button>
-        <button class="opt" data-v="b" onclick="answer(this)">Para ahorrar $24 cada día</button>
-        <button class="opt" data-v="c" onclick="answer(this)">Para esperar a cobrar lo que te deben</button>
-        <button class="opt" data-v="d" onclick="answer(this)">Para revisar precios cada 24 horas</button>
-      </div>
-      <p class="qfb" id="fb7"></p>
-      <div class="qfoot"><span class="qprog">8 de 8</span><button class="btn-next" id="nx7" disabled onclick="showResults()">Ver resultados →</button></div>
-    </div>
+<!-- PAGE 4: QUIZ -->
+<div class="pg" id="pg4">
+  <div class="card" id="qwrap">
+    <div class="card-line" style="background:linear-gradient(90deg,#9B5CFF,#FF2D78)"></div>
+    <p class="lbl" style="color:#9B5CFF">// quiz de finanzas</p>
+    <div class="qbar"><div class="qfill" id="qf" style="width:0%"></div></div>
+    <div id="qarea"></div>
   </div>
-
-  <div id="quiz-result">
-    <div class="card" style="text-align:center;padding:32px 16px">
-      <div class="card-top" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
-      <div class="rscore" id="rscore">8/8</div>
-      <p class="rtitle" id="rtitle"></p>
+  <div id="qres" style="display:none">
+    <div class="card" style="text-align:center;padding:28px 16px">
+      <div class="card-line" style="background:linear-gradient(90deg,#C6FF00,#00F5FF)"></div>
+      <div class="rscore" id="rs"></div>
+      <p class="rtitle" id="rt"></p>
       <p class="rsub" id="rsub"></p>
-      <button class="btn-retry" onclick="resetQ()">Intentar de nuevo</button>
+      <button class="retry" onclick="resetQ()">Intentar de nuevo</button>
     </div>
-  </div>
-</div>
-
-<!-- PRINT OVERLAY -->
-<div id="printlay">
-  <div class="ppage">
-    <button class="btn-close" onclick="hidePrint()">✕ Cerrar</button>
-    <div class="phead">
-      <div class="phead-icon">💸</div>
-      <div><h2>Cash IQ — Mi hoja de finanzas</h2><p>Nombre: _______________________ &nbsp; Semana: _______ &nbsp; Año: _____</p></div>
-    </div>
-    <div class="pgrid">
-      <div class="psec"><h4 class="pt1">Ingresos</h4>
-        <table class="ptbl">
-          <tr><th>Fuente</th><th>Plan</th><th>Real</th></tr>
-          <tr><td>Mesada</td><td>$</td><td>$</td></tr>
-          <tr><td>Regalos</td><td>$</td><td>$</td></tr>
-          <tr><td>Trabajo extra</td><td>$</td><td>$</td></tr>
-          <tr><td>Otro</td><td>$</td><td>$</td></tr>
-          <tr><td><b>TOTAL</b></td><td><b>$</b></td><td><b>$</b></td></tr>
-        </table>
-      </div>
-      <div class="psec"><h4 class="pt2">Gastos</h4>
-        <table class="ptbl">
-          <tr><th>Categoría</th><th>Plan</th><th>Real</th></tr>
-          <tr><td>Comida</td><td>$</td><td>$</td></tr>
-          <tr><td>Juegos</td><td>$</td><td>$</td></tr>
-          <tr><td>Útiles</td><td>$</td><td>$</td></tr>
-          <tr><td>Ropa</td><td>$</td><td>$</td></tr>
-          <tr><td>Transporte</td><td>$</td><td>$</td></tr>
-          <tr><td>Otro</td><td>$</td><td>$</td></tr>
-          <tr><td><b>TOTAL</b></td><td><b>$</b></td><td><b>$</b></td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="pgrid">
-      <div class="psec"><h4 class="pt3">Balance</h4>
-        <table class="ptbl">
-          <tr><th>Concepto</th><th>Cantidad</th></tr>
-          <tr><td>Total ingresos</td><td>$</td></tr>
-          <tr><td>Total gastos</td><td>$</td></tr>
-          <tr><td><b>Ahorro</b></td><td><b>$</b></td></tr>
-        </table>
-        <div class="pbox"><h5>Mi meta</h5><p>Quiero ahorrar: $______________</p><p>¿Para qué?: ___________________</p><p>¿Logré? ☐ Sí &nbsp; ☐ Casi &nbsp; ☐ Next time</p></div>
-      </div>
-      <div class="psec"><h4 class="pt4">Mis metas</h4>
-        <table class="ptbl">
-          <tr><th>¿Para qué?</th><th>Necesito</th><th>Tengo</th></tr>
-          <tr><td></td><td>$</td><td>$</td></tr>
-          <tr><td></td><td>$</td><td>$</td></tr>
-          <tr><td></td><td>$</td><td>$</td></tr>
-        </table>
-        <div class="pbox"><h5>Reflexión</h5><p style="font-size:0.68rem;color:#666;margin-bottom:4px">¿En qué gasté de más esta semana?</p><div class="wline"></div><div class="wline" style="margin-top:4px"></div></div>
-      </div>
-    </div>
-    <div class="ptips"><h5>5 reglas de oro — Cash IQ</h5>
-      <ul>
-        <li>Separa el ahorro PRIMERO, antes de cualquier gasto</li>
-        <li>Ponle nombre a tu ahorro — un objetivo concreto funciona 3x más</li>
-        <li>Antes de comprar algo no planeado, espera 24 horas</li>
-        <li>Anota todo lo que gastas, aunque sea pequeño</li>
-        <li>Necesidades → Ahorro → Deseos. En ese orden, siempre</li>
-      </ul>
-    </div>
-    <p class="pft">Cash IQ — Finanzas para teens &nbsp;|&nbsp; Uso educativo 💸</p>
   </div>
 </div>
 
 <script>
-// NAV — función global, sin addEventListener
-function showPage(id) {
-  var pages = ['intro','conceptos','pres','ahorro','quiz'];
-  for (var i = 0; i < pages.length; i++) {
-    document.getElementById('page-' + pages[i]).className = 'page' + (pages[i] === id ? ' active' : '');
-    document.getElementById('nb-' + pages[i]).className = 'nb' + (pages[i] === id ? ' on' : '');
+var qi = 0, score = 0;
+var qs = [
+  {t:'¿Qué se hace PRIMERO con el dinero según las buenas finanzas?',c:'b',o:['Gastar en lo que quiero','Separar el ahorro','Comprar comida rápida','Prestárselo a un amigo']},
+  {t:'¿Qué es un "presupuesto"?',c:'c',o:['Una cuenta bancaria especial','Todo el dinero que ganas en un año','Un plan escrito de cuánto gastar y en qué','Una app del celular']},
+  {t:'Según la Regla 50/30/20, ¿qué porcentaje se recomienda ahorrar?',c:'a',o:['20%','50%','30%','10%']},
+  {t:'¿Cuál de estas es una NECESIDAD y no un deseo?',c:'b',o:['Videojuego nuevo','Útiles escolares','Bebida de Starbucks','Ropa de marca']},
+  {t:'¿Cuánto acumulas en 1 año con el Método 52 Semanas?',c:'c',o:['$500','$780','$1,378','$2,000']},
+  {t:'¿Cuándo es el mejor momento para separar tu ahorro?',c:'d',o:['Al final del mes, con lo que sobre','Solo cuando tienes mucho dinero','Una vez al año','En cuanto recibes el dinero']},
+  {t:'Si tienes $100, ¿cuánto ahorrar con la regla del 20%?',c:'b',o:['$10','$20','$50','$30']},
+  {t:'¿Para qué sirve la "Regla de las 24 horas"?',c:'a',o:['Para no comprar cosas por impulso','Para ahorrar $24 cada día','Para esperar a cobrar lo que te deben','Para revisar precios cada 24 horas']}
+];
+
+function go(n) {
+  for (var i = 0; i < 5; i++) {
+    document.getElementById('pg' + i).className = 'pg' + (i === n ? ' on' : '');
+    document.getElementById('nb' + i).className = 'nb' + (i === n ? ' on' : '');
   }
   window.scrollTo(0, 0);
+  if (n === 4 && qi === 0) renderQ();
 }
 
-// PRESUPUESTO
 function fmt(n) { return '$' + Math.round(n).toLocaleString('es-MX'); }
 
-function calcPres() {
+function calc() {
   var ing = 0, gas = 0;
-  var inps = document.querySelectorAll('.pinp.ingreso');
-  for (var i = 0; i < inps.length; i++) ing += parseFloat(inps[i].value) || 0;
-  var gasts = document.querySelectorAll('.pinp.gasto');
-  for (var i = 0; i < gasts.length; i++) gas += parseFloat(gasts[i].value) || 0;
+  for (var i = 0; i < 4; i++) ing += parseFloat(document.getElementById('i' + i).value) || 0;
+  for (var i = 0; i < 5; i++) gas += parseFloat(document.getElementById('g' + i).value) || 0;
   var bal = ing - gas;
   document.getElementById('ti').textContent = fmt(ing);
   document.getElementById('tg').textContent = fmt(gas);
   document.getElementById('bi').textContent = fmt(ing);
   document.getElementById('bg').textContent = fmt(gas);
   document.getElementById('bf').textContent = fmt(bal);
-  var r = document.getElementById('res-pres');
+  var r = document.getElementById('rp');
   if (ing > 0 || gas > 0) {
     r.style.display = 'block';
-    r.style.borderRadius = '10px';
-    r.style.padding = '12px 14px';
-    r.style.fontSize = '0.84rem';
-    r.style.fontWeight = '600';
-    r.style.lineHeight = '1.5';
-    if (bal > 0) {
-      r.style.background = 'rgba(198,255,0,.07)';
-      r.style.border = '1px solid rgba(198,255,0,.25)';
-      r.style.color = '#D8FF60';
-      r.textContent = '✅ Bien — te sobran ' + fmt(bal) + '. Guarda ' + fmt(ing * 0.2) + ' como ahorro (regla del 20%).';
-    } else if (bal === 0) {
-      r.style.background = 'rgba(255,184,0,.07)';
-      r.style.border = '1px solid rgba(255,184,0,.25)';
-      r.style.color = '#FFB800';
-      r.textContent = '⚠️ Sin margen de ahorro. Intenta reducir algún gasto.';
-    } else {
-      r.style.background = 'rgba(255,45,120,.07)';
-      r.style.border = '1px solid rgba(255,45,120,.25)';
-      r.style.color = '#FF2D78';
-      r.textContent = '🚨 Gastas ' + fmt(Math.abs(bal)) + ' más de lo que tienes. Revisa tu plan.';
-    }
-  } else {
-    r.style.display = 'none';
-  }
+    r.style.borderRadius = '8px'; r.style.padding = '10px 12px'; r.style.fontSize = '12px'; r.style.fontWeight = '600'; r.style.lineHeight = '1.5';
+    if (bal > 0) { r.style.background = '#0D1A00'; r.style.border = '1px solid #3A5500'; r.style.color = '#C6FF00'; r.textContent = '✅ Bien — te sobran ' + fmt(bal) + '. Guarda ' + fmt(ing * 0.2) + ' como ahorro (regla 20%).'; }
+    else if (bal === 0) { r.style.background = '#1A1400'; r.style.border = '1px solid #554400'; r.style.color = '#FFB800'; r.textContent = '⚠️ Sin margen de ahorro. Intenta reducir algún gasto.'; }
+    else { r.style.background = '#1A0010'; r.style.border = '1px solid #550030'; r.style.color = '#FF2D78'; r.textContent = '🚨 Gastas ' + fmt(Math.abs(bal)) + ' más de lo que tienes. Revisa tu plan.'; }
+  } else { r.style.display = 'none'; }
 }
 
-var allInputs = document.querySelectorAll('.pinp');
-for (var i = 0; i < allInputs.length; i++) {
-  allInputs[i].oninput = calcPres;
-}
-
-// META
-function calcMeta() {
+function meta() {
   var nombre = document.getElementById('mn').value || 'tu meta';
   var costo = parseFloat(document.getElementById('mc').value) || 0;
   var tengo = parseFloat(document.getElementById('mt').value) || 0;
-  var porSem = parseFloat(document.getElementById('ms').value) || 0;
-  var r = document.getElementById('res-meta');
-  r.style.display = 'block';
-  r.style.background = 'rgba(198,255,0,.07)';
-  r.style.border = '1px solid rgba(198,255,0,.25)';
-  r.style.color = '#D8FF60';
-  r.style.borderRadius = '10px';
-  r.style.padding = '12px 14px';
-  r.style.fontSize = '0.84rem';
-  r.style.fontWeight = '600';
-  r.style.lineHeight = '1.5';
-  if (costo <= 0 || porSem <= 0) { r.textContent = '⚠️ Escribe el costo y cuánto puedes ahorrar por semana.'; return; }
+  var ps = parseFloat(document.getElementById('ms').value) || 0;
+  var r = document.getElementById('rm');
+  r.style.display = 'block'; r.style.background = '#0D1A00'; r.style.border = '1px solid #3A5500'; r.style.color = '#C6FF00'; r.style.borderRadius = '8px'; r.style.padding = '10px 12px'; r.style.fontSize = '12px'; r.style.fontWeight = '600'; r.style.lineHeight = '1.5';
+  if (costo <= 0 || ps <= 0) { r.textContent = '⚠️ Escribe el costo y cuánto puedes ahorrar por semana.'; return; }
   var falta = costo - tengo;
   if (falta <= 0) { r.textContent = '🎉 Ya tienes suficiente. ¡A por ello!'; return; }
-  var sem = Math.ceil(falta / porSem);
-  var mes = (sem / 4.33).toFixed(1);
-  r.textContent = nombre + ' — faltan ' + fmt(falta) + '. Ahorrando ' + fmt(porSem) + '/semana: listo en ' + sem + ' semanas (~' + mes + ' meses) 🚀';
+  var sem = Math.ceil(falta / ps);
+  r.textContent = nombre + ' — faltan ' + fmt(falta) + '. Ahorrando ' + fmt(ps) + '/sem: listo en ' + sem + ' semanas (~' + (sem / 4.33).toFixed(1) + ' meses) 🚀';
 }
 
-// QUIZ
-var qi = 0;
-var score = 0;
+function renderQ() {
+  if (qi >= qs.length) return;
+  var q = qs[qi];
+  var keys = ['a','b','c','d'];
+  var h = '<span class="qbadge">0' + (qi + 1) + ' / 08</span>';
+  h += '<p class="qtxt">' + q.t + '</p>';
+  for (var i = 0; i < q.o.length; i++) {
+    h += '<button class="opt" data-v="' + keys[i] + '" onclick="answer(this)">' + q.o[i] + '</button>';
+  }
+  h += '<p class="qfb" id="qfb"></p>';
+  h += '<div class="qfoot"><span class="qprog">' + (qi + 1) + ' de 8</span>';
+  if (qi < 7) h += '<button class="nxbtn" id="nx" disabled onclick="nextQ()">Siguiente →</button>';
+  else h += '<button class="nxbtn" id="nx" disabled onclick="showRes()">Ver resultados →</button>';
+  h += '</div>';
+  document.getElementById('qarea').innerHTML = h;
+  document.getElementById('qf').style.width = (qi / 8 * 100) + '%';
+}
 
 function answer(btn) {
-  var qcard = btn.parentElement.parentElement;
-  var corr = qcard.getAttribute('data-c');
-  var idx = parseInt(qcard.id.replace('q', ''));
-  var opts = qcard.querySelectorAll('.opt');
+  var q = qs[qi];
+  var opts = document.getElementById('qarea').querySelectorAll('.opt');
   for (var i = 0; i < opts.length; i++) opts[i].disabled = true;
-  var fb = document.getElementById('fb' + idx);
-  var nx = document.getElementById('nx' + idx);
-  if (btn.getAttribute('data-v') === corr) {
+  if (btn.getAttribute('data-v') === q.c) {
     btn.className = 'opt ok';
-    fb.textContent = '✓ Correcto';
-    fb.style.color = '#C6FF00';
+    document.getElementById('qfb').textContent = '✓ Correcto';
+    document.getElementById('qfb').style.color = '#C6FF00';
     score++;
   } else {
     btn.className = 'opt err';
-    var goodBtns = qcard.querySelectorAll('.opt');
-    for (var i = 0; i < goodBtns.length; i++) {
-      if (goodBtns[i].getAttribute('data-v') === corr) goodBtns[i].className = 'opt ok';
-    }
-    fb.textContent = '✗ No era esa — la correcta está en verde';
-    fb.style.color = '#FF2D78';
+    for (var i = 0; i < opts.length; i++) { if (opts[i].getAttribute('data-v') === q.c) opts[i].className = 'opt ok'; }
+    document.getElementById('qfb').textContent = '✗ No era esa — la correcta está en verde';
+    document.getElementById('qfb').style.color = '#FF2D78';
   }
-  nx.disabled = false;
-  document.getElementById('qfill').style.width = ((idx + 1) / 8 * 100) + '%';
+  document.getElementById('nx').disabled = false;
+  document.getElementById('qf').style.width = ((qi + 1) / 8 * 100) + '%';
 }
 
-function nextQ(idx) {
-  document.getElementById('q' + idx).className = 'qcard';
-  qi = idx + 1;
-  document.getElementById('q' + qi).className = 'qcard on';
-}
+function nextQ() { qi++; renderQ(); }
 
-function showResults() {
-  document.getElementById('quiz-wrap').style.display = 'none';
-  document.getElementById('quiz-result').style.display = 'block';
+function showRes() {
+  document.getElementById('qwrap').style.display = 'none';
+  document.getElementById('qres').style.display = 'block';
   var p = score / 8;
-  var title, sub;
-  if (p === 1) { title = 'Perfecto. Eres un genio financiero.'; sub = '8 de 8 — completamente listo para manejar tu dinero.'; }
-  else if (p >= 0.75) { title = 'Excelente resultado.'; sub = score + ' de 8 correctas — base muy sólida.'; }
-  else if (p >= 0.5) { title = 'Buen trabajo.'; sub = score + ' de 8 — repasa los temas donde fallaste.'; }
-  else { title = 'Sigue practicando.'; sub = score + ' de 8 — vuelve a los conceptos e intenta de nuevo.'; }
-  document.getElementById('rscore').textContent = score + '/8';
-  document.getElementById('rtitle').textContent = title;
-  document.getElementById('rsub').textContent = sub;
+  var t, s;
+  if (p === 1) { t = 'Perfecto. Eres un genio financiero.'; s = '8/8 — completamente listo para manejar tu dinero.'; }
+  else if (p >= .75) { t = 'Excelente resultado.'; s = score + '/8 correctas — base muy sólida.'; }
+  else if (p >= .5) { t = 'Buen trabajo.'; s = score + '/8 — repasa donde fallaste e intenta de nuevo.'; }
+  else { t = 'Sigue practicando.'; s = score + '/8 — vuelve a los conceptos y repite el quiz.'; }
+  document.getElementById('rs').textContent = score + '/8';
+  document.getElementById('rt').textContent = t;
+  document.getElementById('rsub').textContent = s;
 }
 
 function resetQ() {
   qi = 0; score = 0;
-  document.getElementById('quiz-wrap').style.display = 'block';
-  document.getElementById('quiz-result').style.display = 'none';
-  document.getElementById('qfill').style.width = '0%';
-  for (var i = 0; i < 8; i++) {
-    var qcard = document.getElementById('q' + i);
-    qcard.className = 'qcard' + (i === 0 ? ' on' : '');
-    var opts = qcard.querySelectorAll('.opt');
-    for (var j = 0; j < opts.length; j++) { opts[j].disabled = false; opts[j].className = 'opt'; }
-    document.getElementById('fb' + i).textContent = '';
-    document.getElementById('nx' + i).disabled = true;
-  }
-}
-
-// PRINT
-function showPrint() {
-  document.getElementById('printlay').style.display = 'block';
-  document.body.style.overflow = 'hidden';
-}
-function hidePrint() {
-  document.getElementById('printlay').style.display = 'none';
-  document.body.style.overflow = '';
+  document.getElementById('qwrap').style.display = 'block';
+  document.getElementById('qres').style.display = 'none';
+  renderQ();
 }
 </script>
 </body>
