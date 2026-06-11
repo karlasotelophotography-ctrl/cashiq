@@ -9,81 +9,33 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: #0D0D0F; }
 body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0F0F4; font-size: 15px; }
-
-/* NAV — sticky top, sin overflow en body */
-.nav {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  background: #161619;
-  border-bottom: 1px solid #2A2A32;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
+.nav { position: -webkit-sticky; position: sticky; top: 0; z-index: 100; display: flex; background: #161619; border-bottom: 1px solid #2A2A32; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
-.nb {
-  flex: 1;
-  min-width: 60px;
-  padding: 11px 4px 10px;
-  border: none;
-  background: none;
-  color: #6B6B7A;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  -webkit-tap-highlight-color: transparent;
-}
+.nb { flex: 1; min-width: 60px; padding: 11px 4px 10px; border: none; background: none; color: #6B6B7A; font-family: 'Space Grotesk', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; cursor: pointer; border-bottom: 2px solid transparent; display: flex; flex-direction: column; align-items: center; gap: 3px; -webkit-tap-highlight-color: transparent; }
 .nb .ni { font-size: 18px; line-height: 1; }
 .nb.on { color: #C6FF00; border-bottom-color: #C6FF00; }
-
-/* PAGES */
 .pg { display: none; padding: 18px 16px 60px; }
 .pg.on { display: block; }
-
-/* CARDS */
 .card { background: #161619; border: 1px solid #2A2A32; border-radius: 12px; padding: 16px; margin-bottom: 12px; position: relative; overflow: hidden; }
 .card-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
 .lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 12px; }
-
-/* INFO ROWS */
 .ir { background: #1E1E23; border-radius: 8px; padding: 10px 12px; margin-bottom: 7px; border-left: 3px solid; }
 .ir .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 2px; }
 .ir .v { font-size: 13px; color: #C8C8D0; line-height: 1.4; }
-
-/* TIPS */
 .tip { display: flex; gap: 10px; background: #1E1E23; border-radius: 10px; padding: 11px; border: 1px solid #2A2A32; margin-bottom: 7px; }
 .tn { font-size: 18px; font-weight: 700; min-width: 26px; color: #C6FF00; font-family: 'Space Mono', monospace; }
 .tip h4 { font-size: 13px; font-weight: 700; margin: 0 0 2px; color: #F0F0F4; }
 .tip p { font-size: 12px; color: #6B6B7A; margin: 0; line-height: 1.4; }
-
-/* HIGHLIGHT */
 .hl { background: #0D1A00; border: 1px solid #3A5500; border-radius: 8px; padding: 11px 13px; margin: 10px 0; font-size: 12px; font-weight: 600; color: #C6FF00; line-height: 1.5; }
-
-/* NVW */
 .nvw { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .nvbox { border-radius: 8px; padding: 10px; border: 1px solid; }
 .nvbox h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin: 0 0 7px; }
 .nvbox li { font-size: 11px; opacity: .85; padding: 2px 0; list-style: none; line-height: 1.4; }
-
-/* REGLA */
 .regla { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-top: 10px; }
 .rb { border-radius: 10px; padding: 12px 8px; border: 1px solid; }
 .rb .pct { font-family: 'Space Mono', monospace; font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
 .rb h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin: 0 0 2px; }
 .rb p { font-size: 10px; opacity: .7; line-height: 1.3; margin: 0; }
-
-/* PRES */
 .prow { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #2A2A32; }
 .prow:last-of-type { border: none; }
 .prow label { flex: 1; font-size: 12px; font-weight: 600; color: #C8C8D0; }
@@ -92,29 +44,21 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
 .ptot { display: flex; justify-content: space-between; align-items: center; background: #1E1E23; border-radius: 7px; padding: 9px 12px; margin-top: 8px; }
 .ptot .l { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #6B6B7A; }
 .ptot strong { font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; }
-
-/* BALANCE */
 .bals { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin: 10px 0; }
 .balc { border-radius: 8px; padding: 9px 6px; border: 1px solid; text-align: center; }
 .balc .bl { font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 3px; opacity: .8; }
 .balc .bv { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; }
 .resbox { display: none; border-radius: 8px; padding: 10px 12px; margin-top: 8px; font-size: 12px; font-weight: 600; line-height: 1.5; }
-
-/* META */
 .mgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .full { grid-column: 1 / -1; }
 .iw label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #6B6B7A; display: block; margin-bottom: 5px; }
 .iw input { width: 100%; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 7px; padding: 9px 10px; color: #F0F0F4; font-family: 'Space Grotesk', sans-serif; font-size: 13px; outline: none; -webkit-appearance: none; }
 .iw input:focus { border-color: #9B5CFF; }
 .btnlime { display: block; width: 100%; padding: 12px; border-radius: 9px; border: none; background: #C6FF00; color: #0D0D0F; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-
-/* BARRAS */
 .brow { margin: 7px 0; }
 .brow-top { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #6B6B7A; margin-bottom: 4px; }
 .btrack { height: 5px; background: #1E1E23; border-radius: 999px; overflow: hidden; }
 .bfill { height: 100%; border-radius: 999px; }
-
-/* QUIZ */
 .qbar { height: 3px; background: #2A2A32; border-radius: 999px; margin-bottom: 14px; overflow: hidden; }
 .qfill { height: 100%; background: #C6FF00; border-radius: 999px; transition: width .4s; }
 .qbadge { display: inline-block; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 5px; padding: 2px 9px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6B6B7A; margin-bottom: 9px; }
@@ -130,24 +74,82 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
 .qprog { font-size: 11px; color: #6B6B7A; font-weight: 600; }
 .nxbtn { padding: 8px 18px; border-radius: 7px; border: none; background: #C6FF00; color: #0D0D0F; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .nxbtn:disabled { opacity: .3; cursor: default; }
-
-/* RESULT */
 .rscore { font-family: 'Space Mono', monospace; font-size: 48px; font-weight: 700; color: #C6FF00; line-height: 1; }
 .rtitle { font-size: 16px; font-weight: 700; margin: 10px 0 5px; color: #F0F0F4; }
 .rsub { font-size: 12px; color: #6B6B7A; margin-bottom: 20px; line-height: 1.5; }
 .retry { padding: 10px 24px; border-radius: 7px; border: 1px solid #2A2A32; background: transparent; color: #F0F0F4; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; }
+.save-badge { display: inline-block; background: #0D1A00; border: 1px solid #3A5500; color: #C6FF00; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 2px 8px; margin-left: 8px; letter-spacing: .5px; }
+.btn-clear { display: block; width: 100%; padding: 10px; border-radius: 9px; border: 1px solid #2A2A32; background: transparent; color: #6B6B7A; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; margin-top: 8px; -webkit-tap-highlight-color: transparent; }
+
+/* AUTH SCREEN */
+#authscreen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+.auth-box { width: 100%; max-width: 360px; }
+.auth-tabs { display: flex; background: #161619; border: 1px solid #2A2A32; border-radius: 10px; padding: 4px; margin-bottom: 18px; }
+.auth-tab { flex: 1; padding: 9px; border: none; background: none; color: #6B6B7A; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; border-radius: 7px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.auth-tab.on { background: #C6FF00; color: #0D0D0F; }
+.auth-field { margin-bottom: 12px; }
+.auth-field label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #6B6B7A; display: block; margin-bottom: 5px; }
+.auth-field input { width: 100%; background: #1E1E23; border: 1px solid #2A2A32; border-radius: 9px; padding: 12px; color: #F0F0F4; font-family: 'Space Grotesk', sans-serif; font-size: 14px; outline: none; -webkit-appearance: none; }
+.auth-field input:focus { border-color: #C6FF00; }
+.auth-err { display: none; background: #1A0010; border: 1px solid #550030; color: #FF2D78; border-radius: 8px; padding: 10px 12px; font-size: 12px; font-weight: 600; margin-bottom: 12px; line-height: 1.5; }
+.auth-loading { display: none; text-align: center; color: #6B6B7A; font-size: 12px; margin-top: 10px; }
+#topbar { display: none; align-items: center; justify-content: space-between; padding: 10px 16px; background: #161619; border-bottom: 1px solid #2A2A32; }
+#topbar .em { font-size: 11px; color: #6B6B7A; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+.btn-logout { background: none; border: 1px solid #2A2A32; color: #6B6B7A; border-radius: 7px; padding: 6px 12px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#mainapp { display: none; }
+#loadscreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- LOADING SCREEN -->
+<div id="loadscreen">
+  <div style="text-align:center">
+    <div style="width:62px;height:62px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px">💸</div>
+    <p style="color:#6B6B7A;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase">Cargando...</p>
+  </div>
+</div>
+
+<!-- AUTH SCREEN -->
+<div id="authscreen" style="display:none">
+  <div class="auth-box">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:62px;height:62px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px">💸</div>
+      <h1 style="font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px">Cash IQ</h1>
+      <p style="color:#6B6B7A;font-size:0.78rem;letter-spacing:.5px;text-transform:uppercase;font-weight:600">Finanzas para la generación que sí entiende</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab on" id="tab-login" onclick="switchAuthTab('login')">Entrar</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Crear cuenta</button>
+    </div>
+    <div class="auth-err" id="auth-err"></div>
+    <div class="auth-field">
+      <label>Correo electrónico</label>
+      <input type="email" id="auth-email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+    </div>
+    <div class="auth-field">
+      <label>Contraseña</label>
+      <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btnlime" id="auth-btn" onclick="doAuth()">Entrar</button>
+    <p class="auth-loading" id="auth-loading">Procesando...</p>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainapp">
+
+<div id="topbar">
+  <span class="em" id="user-email"></span>
+  <button class="btn-logout" onclick="doLogout()">Salir</button>
+</div>
+
 <div style="text-align:center;padding:36px 16px 20px;background:#0D0D0F">
   <div style="width:62px;height:62px;background:linear-gradient(135deg,#C6FF00,#00F5FF);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 12px">💸</div>
   <h1 style="font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;background:linear-gradient(135deg,#C6FF00,#00F5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:5px">Cash IQ</h1>
   <p style="color:#6B6B7A;font-size:0.78rem;letter-spacing:.5px;text-transform:uppercase;font-weight:600">Finanzas para la generación que sí entiende</p>
 </div>
 
-<!-- TOP NAV -->
 <nav class="nav">
   <button class="nb on" id="nb0" onclick="go(0)"><span class="ni">⚡</span>Start</button>
   <button class="nb" id="nb1" onclick="go(1)"><span class="ni">🧠</span>Conceptos</button>
@@ -191,14 +193,8 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
     <div class="card-line" style="background:linear-gradient(90deg,#FF2D78,#9B5CFF)"></div>
     <p class="lbl" style="color:#FF2D78">// necesidades vs. deseos</p>
     <div class="nvw">
-      <div class="nvbox" style="background:#001A1A;border-color:#00F5FF;color:#00F5FF">
-        <h4>Necesidades ✓</h4>
-        <ul><li>Comida</li><li>Útiles escolares</li><li>Transporte</li><li>Ropa básica</li></ul>
-      </div>
-      <div class="nvbox" style="background:#1A0010;border-color:#FF2D78;color:#FF2D78">
-        <h4>Deseos ✗</h4>
-        <ul><li>Videojuegos</li><li>Bebidas fancy</li><li>Tenis de marca</li><li>Snacks extra</li></ul>
-      </div>
+      <div class="nvbox" style="background:#001A1A;border-color:#00F5FF;color:#00F5FF"><h4>Necesidades ✓</h4><ul><li>Comida</li><li>Útiles escolares</li><li>Transporte</li><li>Ropa básica</li></ul></div>
+      <div class="nvbox" style="background:#1A0010;border-color:#FF2D78;color:#FF2D78"><h4>Deseos ✗</h4><ul><li>Videojuegos</li><li>Bebidas fancy</li><li>Tenis de marca</li><li>Snacks extra</li></ul></div>
     </div>
     <div class="hl" style="margin-bottom:0">Necesidades primero → ahorro → con lo que sobre: deseos. No al revés.</div>
   </div>
@@ -217,21 +213,21 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
 <div class="pg" id="pg2">
   <div class="card">
     <div class="card-line" style="background:#00F5FF"></div>
-    <p class="lbl" style="color:#00F5FF">// ingresos esta semana</p>
-    <div class="prow"><label>💰 Mesada / domingo</label><input class="pinp" id="i0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>🎁 Regalos</label><input class="pinp" id="i1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>🛠️ Trabajo extra</label><input class="pinp" id="i2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>⭐ Otro</label><input class="pinp" id="i3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <p class="lbl" style="color:#00F5FF">// ingresos esta semana <span class="save-badge" id="save-badge">☁️ guardado en la nube</span></p>
+    <div class="prow"><label>💰 Mesada / domingo</label><input class="pinp" id="i0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>🎁 Regalos</label><input class="pinp" id="i1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>🛠️ Trabajo extra</label><input class="pinp" id="i2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>⭐ Otro</label><input class="pinp" id="i3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
     <div class="ptot"><span class="l">Total ingresos</span><strong id="ti" style="color:#00F5FF">$0</strong></div>
   </div>
   <div class="card">
     <div class="card-line" style="background:#FF2D78"></div>
     <p class="lbl" style="color:#FF2D78">// gastos esta semana</p>
-    <div class="prow"><label>🍕 Comida / antojo</label><input class="pinp" id="g0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>🎮 Juegos / entrete.</label><input class="pinp" id="g1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>📚 Útiles / libros</label><input class="pinp" id="g2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>👟 Ropa / accesorios</label><input class="pinp" id="g3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
-    <div class="prow"><label>🌀 Otro</label><input class="pinp" id="g4" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc()"></div>
+    <div class="prow"><label>🍕 Comida / antojo</label><input class="pinp" id="g0" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>🎮 Juegos / entrete.</label><input class="pinp" id="g1" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>📚 Útiles / libros</label><input class="pinp" id="g2" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>👟 Ropa / accesorios</label><input class="pinp" id="g3" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
+    <div class="prow"><label>🌀 Otro</label><input class="pinp" id="g4" type="number" placeholder="0" min="0" inputmode="decimal" oninput="calc();save()"></div>
     <div class="ptot"><span class="l">Total gastos</span><strong id="tg" style="color:#FF2D78">$0</strong></div>
   </div>
   <div class="card">
@@ -243,15 +239,16 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
       <div class="balc" style="background:#0D1A00;border-color:#C6FF00;color:#C6FF00"><div class="bl">Libre</div><div class="bv" id="bf">$0</div></div>
     </div>
     <div class="resbox" id="rp"></div>
+    <button class="btn-clear" onclick="clearData()">🗑️ Borrar datos y empezar de nuevo</button>
   </div>
   <div class="card">
     <div class="card-line" style="background:#9B5CFF"></div>
     <p class="lbl" style="color:#9B5CFF">// ¿cuándo alcanzo mi meta?</p>
     <div class="mgrid">
-      <div class="iw full"><label>¿Para qué quiero ahorrar?</label><input type="text" id="mn" placeholder="Ej: tenis nuevos, videojuego"></div>
-      <div class="iw"><label>¿Cuánto cuesta? ($)</label><input type="number" id="mc" placeholder="800" inputmode="decimal"></div>
-      <div class="iw"><label>¿Ya tienes? ($)</label><input type="number" id="mt" placeholder="200" inputmode="decimal"></div>
-      <div class="iw full"><label>¿Cuánto puedes ahorrar/semana? ($)</label><input type="number" id="ms" placeholder="50" inputmode="decimal"></div>
+      <div class="iw full"><label>¿Para qué quiero ahorrar?</label><input type="text" id="mn" placeholder="Ej: tenis nuevos, videojuego" oninput="save()"></div>
+      <div class="iw"><label>¿Cuánto cuesta? ($)</label><input type="number" id="mc" placeholder="800" inputmode="decimal" oninput="save()"></div>
+      <div class="iw"><label>¿Ya tienes? ($)</label><input type="number" id="mt" placeholder="200" inputmode="decimal" oninput="save()"></div>
+      <div class="iw full"><label>¿Cuánto puedes ahorrar/semana? ($)</label><input type="number" id="ms" placeholder="50" inputmode="decimal" oninput="save()"></div>
       <button class="btnlime full" onclick="meta()">Calcular →</button>
       <div class="resbox full" id="rm"></div>
     </div>
@@ -301,6 +298,171 @@ body { font-family: 'Space Grotesk', sans-serif; background: #0D0D0F; color: #F0
   </div>
 </div>
 
+</div><!-- /mainapp -->
+
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAlb1b5fcF_BoP9IDhEm-1C6AidcpZRp4s",
+  authDomain: "kit-finanzas-karla.firebaseapp.com",
+  projectId: "kit-finanzas-karla",
+  storageBucket: "kit-finanzas-karla.firebasestorage.app",
+  messagingSenderId: "171814775539",
+  appId: "1:171814775539:web:0b78ddea1ac59cef1e2586"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let saveTimeout = null;
+let authMode = 'login';
+
+window.switchAuthTab = function(mode) {
+  authMode = mode;
+  document.getElementById('tab-login').className = 'auth-tab' + (mode === 'login' ? ' on' : '');
+  document.getElementById('tab-register').className = 'auth-tab' + (mode === 'register' ? ' on' : '');
+  document.getElementById('auth-btn').textContent = mode === 'login' ? 'Entrar' : 'Crear mi cuenta';
+  document.getElementById('auth-err').style.display = 'none';
+};
+
+window.doAuth = async function() {
+  const email = document.getElementById('auth-email').value.trim();
+  const pass = document.getElementById('auth-pass').value;
+  const errBox = document.getElementById('auth-err');
+  const loading = document.getElementById('auth-loading');
+  const btn = document.getElementById('auth-btn');
+  errBox.style.display = 'none';
+
+  if (!email || !pass) {
+    errBox.textContent = '⚠️ Completa tu correo y contraseña.';
+    errBox.style.display = 'block';
+    return;
+  }
+  if (pass.length < 6) {
+    errBox.textContent = '⚠️ La contraseña debe tener al menos 6 caracteres.';
+    errBox.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  loading.style.display = 'block';
+
+  try {
+    if (authMode === 'login') {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } else {
+      await createUserWithEmailAndPassword(auth, email, pass);
+    }
+  } catch (e) {
+    let msg = 'Ocurrió un error. Intenta de nuevo.';
+    if (e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password' || e.code === 'auth/user-not-found') msg = '❌ Correo o contraseña incorrectos.';
+    else if (e.code === 'auth/email-already-in-use') msg = '⚠️ Ese correo ya tiene una cuenta. Toca "Entrar".';
+    else if (e.code === 'auth/invalid-email') msg = '⚠️ Correo no válido.';
+    else if (e.code === 'auth/weak-password') msg = '⚠️ La contraseña es muy débil (mínimo 6 caracteres).';
+    errBox.textContent = msg;
+    errBox.style.display = 'block';
+  }
+
+  btn.disabled = false;
+  loading.style.display = 'none';
+};
+
+window.doLogout = async function() {
+  await signOut(auth);
+};
+
+onAuthStateChanged(auth, async (user) => {
+  document.getElementById('loadscreen').style.display = 'none';
+  if (user) {
+    currentUser = user;
+    document.getElementById('authscreen').style.display = 'none';
+    document.getElementById('mainapp').style.display = 'block';
+    document.getElementById('topbar').style.display = 'flex';
+    document.getElementById('user-email').textContent = user.email;
+    await loadData();
+  } else {
+    currentUser = null;
+    document.getElementById('mainapp').style.display = 'none';
+    document.getElementById('topbar').style.display = 'none';
+    document.getElementById('authscreen').style.display = 'flex';
+  }
+});
+
+// ── FIRESTORE SAVE/LOAD ──
+window.save = function() {
+  if (!currentUser) return;
+  clearTimeout(saveTimeout);
+  const badge = document.getElementById('save-badge');
+  badge.textContent = '💾 guardando...';
+  badge.style.color = '#FFB800';
+  badge.style.borderColor = '#554400';
+  badge.style.background = '#1A1400';
+  saveTimeout = setTimeout(async () => {
+    const data = {};
+    for (let i = 0; i < 4; i++) data['i' + i] = document.getElementById('i' + i).value;
+    for (let i = 0; i < 5; i++) data['g' + i] = document.getElementById('g' + i).value;
+    data.mn = document.getElementById('mn').value;
+    data.mc = document.getElementById('mc').value;
+    data.mt = document.getElementById('mt').value;
+    data.ms = document.getElementById('ms').value;
+    try {
+      await setDoc(doc(db, 'cashiq_users', currentUser.uid), data);
+      badge.textContent = '☁️ guardado en la nube';
+      badge.style.color = '#C6FF00';
+      badge.style.borderColor = '#3A5500';
+      badge.style.background = '#0D1A00';
+    } catch (e) {
+      badge.textContent = '⚠️ error al guardar';
+      badge.style.color = '#FF2D78';
+      badge.style.borderColor = '#550030';
+      badge.style.background = '#1A0010';
+    }
+  }, 800);
+};
+
+async function loadData() {
+  if (!currentUser) return;
+  try {
+    const snap = await getDoc(doc(db, 'cashiq_users', currentUser.uid));
+    if (snap.exists()) {
+      const data = snap.data();
+      for (let i = 0; i < 4; i++) if (data['i' + i]) document.getElementById('i' + i).value = data['i' + i];
+      for (let i = 0; i < 5; i++) if (data['g' + i]) document.getElementById('g' + i).value = data['g' + i];
+      if (data.mn) document.getElementById('mn').value = data.mn;
+      if (data.mc) document.getElementById('mc').value = data.mc;
+      if (data.mt) document.getElementById('mt').value = data.mt;
+      if (data.ms) document.getElementById('ms').value = data.ms;
+      window.calc();
+    }
+  } catch (e) {}
+}
+
+window.clearData = async function() {
+  if (!confirm('¿Borrar todos los datos y empezar de nuevo?')) return;
+  for (let i = 0; i < 4; i++) document.getElementById('i' + i).value = '';
+  for (let i = 0; i < 5; i++) document.getElementById('g' + i).value = '';
+  document.getElementById('mn').value = '';
+  document.getElementById('mc').value = '';
+  document.getElementById('mt').value = '';
+  document.getElementById('ms').value = '';
+  window.calc();
+  if (currentUser) {
+    await setDoc(doc(db, 'cashiq_users', currentUser.uid), {});
+  }
+};
+</script>
+
 <script>
 var qi = 0, score = 0;
 var qs = [
@@ -325,7 +487,7 @@ function go(n) {
 
 function fmt(n) { return '$' + Math.round(n).toLocaleString('es-MX'); }
 
-function calc() {
+window.calc = function() {
   var ing = 0, gas = 0;
   for (var i = 0; i < 4; i++) ing += parseFloat(document.getElementById('i' + i).value) || 0;
   for (var i = 0; i < 5; i++) gas += parseFloat(document.getElementById('g' + i).value) || 0;
@@ -337,13 +499,12 @@ function calc() {
   document.getElementById('bf').textContent = fmt(bal);
   var r = document.getElementById('rp');
   if (ing > 0 || gas > 0) {
-    r.style.display = 'block';
-    r.style.borderRadius = '8px'; r.style.padding = '10px 12px'; r.style.fontSize = '12px'; r.style.fontWeight = '600'; r.style.lineHeight = '1.5';
+    r.style.display = 'block'; r.style.borderRadius = '8px'; r.style.padding = '10px 12px'; r.style.fontSize = '12px'; r.style.fontWeight = '600'; r.style.lineHeight = '1.5';
     if (bal > 0) { r.style.background = '#0D1A00'; r.style.border = '1px solid #3A5500'; r.style.color = '#C6FF00'; r.textContent = '✅ Bien — te sobran ' + fmt(bal) + '. Guarda ' + fmt(ing * 0.2) + ' como ahorro (regla 20%).'; }
     else if (bal === 0) { r.style.background = '#1A1400'; r.style.border = '1px solid #554400'; r.style.color = '#FFB800'; r.textContent = '⚠️ Sin margen de ahorro. Intenta reducir algún gasto.'; }
     else { r.style.background = '#1A0010'; r.style.border = '1px solid #550030'; r.style.color = '#FF2D78'; r.textContent = '🚨 Gastas ' + fmt(Math.abs(bal)) + ' más de lo que tienes. Revisa tu plan.'; }
   } else { r.style.display = 'none'; }
-}
+};
 
 function meta() {
   var nombre = document.getElementById('mn').value || 'tu meta';
@@ -365,9 +526,7 @@ function renderQ() {
   var keys = ['a','b','c','d'];
   var h = '<span class="qbadge">0' + (qi + 1) + ' / 08</span>';
   h += '<p class="qtxt">' + q.t + '</p>';
-  for (var i = 0; i < q.o.length; i++) {
-    h += '<button class="opt" data-v="' + keys[i] + '" onclick="answer(this)">' + q.o[i] + '</button>';
-  }
+  for (var i = 0; i < q.o.length; i++) h += '<button class="opt" data-v="' + keys[i] + '" onclick="answer(this)">' + q.o[i] + '</button>';
   h += '<p class="qfb" id="qfb"></p>';
   h += '<div class="qfoot"><span class="qprog">' + (qi + 1) + ' de 8</span>';
   if (qi < 7) h += '<button class="nxbtn" id="nx" disabled onclick="nextQ()">Siguiente →</button>';
@@ -383,14 +542,11 @@ function answer(btn) {
   for (var i = 0; i < opts.length; i++) opts[i].disabled = true;
   if (btn.getAttribute('data-v') === q.c) {
     btn.className = 'opt ok';
-    document.getElementById('qfb').textContent = '✓ Correcto';
-    document.getElementById('qfb').style.color = '#C6FF00';
-    score++;
+    document.getElementById('qfb').textContent = '✓ Correcto'; document.getElementById('qfb').style.color = '#C6FF00'; score++;
   } else {
     btn.className = 'opt err';
     for (var i = 0; i < opts.length; i++) { if (opts[i].getAttribute('data-v') === q.c) opts[i].className = 'opt ok'; }
-    document.getElementById('qfb').textContent = '✗ No era esa — la correcta está en verde';
-    document.getElementById('qfb').style.color = '#FF2D78';
+    document.getElementById('qfb').textContent = '✗ No era esa — la correcta está en verde'; document.getElementById('qfb').style.color = '#FF2D78';
   }
   document.getElementById('nx').disabled = false;
   document.getElementById('qf').style.width = ((qi + 1) / 8 * 100) + '%';
@@ -418,6 +574,13 @@ function resetQ() {
   document.getElementById('qres').style.display = 'none';
   renderQ();
 }
+
+window.go = go;
+window.meta = meta;
+window.answer = answer;
+window.nextQ = nextQ;
+window.showRes = showRes;
+window.resetQ = resetQ;
 </script>
 </body>
 </html>
